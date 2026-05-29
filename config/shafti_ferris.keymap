@@ -1,0 +1,80 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#undef ZMK_BEHAVIORS_KEEP_ALL
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+
+#define L   1
+#define R   2
+#define NUM 3
+
+/ {
+    behaviors {
+        lt: layer_tap_chamber {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&sl>;   // hold -> momentary, tap -> sticky layer
+        };
+        amp_star: amp_star {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp AMPS>, <&kp STAR>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        both_thumbs {
+            if-layers = <L R>;
+            then-layer = <NUM>;
+        };
+    };
+    keymap {
+        compatible = "zmk,keymap";
+        default_layer {
+            bindings = <
+                &kp Q      &kp W      &kp E       &kp R          &kp T         &kp Y            &kp U          &kp I       &kp O      &kp P
+                &kp A      &kp S      &kp D       &kp F          &kp G         &kp H            &kp J          &kp K       &kp L      &kp SEMI 
+                &kp Z      &kp X      &kp C       &kp V          &kp B         &kp N            &kp M          &kp COMMA   &kp DOT    &kp FSLH
+                &lt L L        &kp SPACE     &kp RCTRL         &lt R R
+            >;
+        };
+        left_layer {
+            bindings = <
+                &kp LT     &kp ESC   &kp LBKT    &kp LPAR   &kp LBRC          &trans           &trans         &trans      &trans     &trans
+                &sk LSHFT  &sk LALT   &sk LGUI    &sk LCTRL  &kp BSPC          &trans           &trans         &trans      &trans     &trans
+                &kp EXCL  &kp AT   &kp HASH    &kp DLLR   &kp PRCNT         &trans           &trans         &trans      &trans     &trans
+                &mo L   &kp SPACE         &trans           &trans
+            >;
+        };
+        right_layer {
+            bindings = < 
+            &trans     &trans     &trans      &trans     &trans            &kp RBRC         &kp RPAR       &kp RBKT    &kp PIPE      &kp GT
+            &trans     &trans     &trans      &trans     &trans            &kp RET          &sk RCTRL      &sk RGUI    &sk RALT      &sk RSHFT
+            &trans     &trans     &trans      &trans     &trans            &kp SQT          &amp_star      &kp GRAVE     &kp BSLH  &kp MINUS
+            &trans     &trans            &mo R        &kp SPACE
+            >;
+        };
+
+        num_layer {
+            display-name = "Num";
+            bindings = <
+                &kp CARET   &kp N7   &kp N8   &kp N9   &kp STAR       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_CLR   &out OUT_TOG
+                &kp EQUAL   &kp N4   &kp N5   &kp N6   &kp PLUS       &kp C_PREV    &kp C_VOL_DN  &kp C_VOL_UP  &kp C_NEXT   &kp C_PP
+                &kp FSLH    &kp N1   &kp N2   &kp N3   &kp MINUS      &kp C_MUTE    &kp C_BRI_DN  &kp C_BRI_UP  &bootloader  &sys_reset
+                &kp N0   &kp DOT        &trans   &trans
+            >;
+        };  
+
+    };
+};
