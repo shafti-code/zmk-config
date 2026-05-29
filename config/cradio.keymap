@@ -35,7 +35,7 @@
     conditional_layers {
         compatible = "zmk,conditional-layers";
         both_thumbs {
-            if-layers = <L R>;
+            if-layers = <LEFT_L RIGHT_L>;
             then-layer = <NUM>;
         };
     };
@@ -65,7 +65,6 @@
             &trans     &trans            &mo RIGHT_L        &kp SPACE
             >;
         };
-
         num_layer {
             display-name = "Num";
             bindings = <
