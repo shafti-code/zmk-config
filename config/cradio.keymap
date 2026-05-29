@@ -32,13 +32,17 @@
         };
     };
 
-    conditional_layers {
-        compatible = "zmk,conditional-layers";
-        both_thumbs {
-            if-layers = <LEFT_L RIGHT_L>;
-            then-layer = <NUM>;
+    combos {
+        compatible = "zmk,combos";
+        combo_num {
+            timeout-ms = <50>;          // both must be pressed within 50ms
+            key-positions = <30 33>;    // the two thumb layer-key positions
+            bindings = <&mo NUM>;
+            layers = <0>;               // only triggers from base layer
         };
     };
+
+
     keymap {
         compatible = "zmk,keymap";
         default_layer {
@@ -54,7 +58,7 @@
                 &kp LT     &kp ESC   &kp LBKT    &kp LPAR   &kp LBRC          &trans           &trans         &trans      &trans     &trans
                 &sk LSHFT  &sk LALT   &sk LGUI    &sk LCTRL  &kp BSPC          &trans           &trans         &trans      &trans     &trans
                 &kp EXCL  &kp AT   &kp HASH    &kp DLLR   &kp PRCNT         &trans           &trans         &trans      &trans     &trans
-                &mo LEFT_L   &kp SPACE         &trans           &trans
+                &mo LEFT_L   &kp TAB         &trans           &trans
             >;
         };
         right_layer {
@@ -62,7 +66,7 @@
             &trans     &trans     &trans      &trans     &trans            &kp RBRC         &kp RPAR       &kp RBKT    &kp PIPE      &kp GT
             &trans     &trans     &trans      &trans     &trans            &kp RET          &sk RCTRL      &sk RGUI    &sk RALT      &sk RSHFT
             &trans     &trans     &trans      &trans     &trans            &kp SQT          &amp_star      &kp GRAVE     &kp BSLH  &kp MINUS
-            &trans     &trans            &mo RIGHT_L        &kp SPACE
+            &trans     &trans            &kp SPACE         &mo RIGHT_L 
             >;
         };
         num_layer {
