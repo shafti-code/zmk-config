@@ -73,7 +73,7 @@
             bindings = <
                 &kp CARET   &kp N7   &kp N8   &kp N9   &kp STAR       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &none   &out OUT_TOG
                 &kp EQUAL   &kp N4   &kp N5   &kp N6   &kp PLUS       &kp C_PREV    &kp C_VOL_DN  &kp C_VOL_UP  &kp C_NEXT   &kp C_PP
-                &kp FSLH    &kp N1   &kp N2   &kp N3   &kp MINUS      &kp C_MUTE    &kp C_BRI_DN  &kp C_BRI_UP  &none  &none
+                &kp N0   &kp N1   &kp N2   &kp N3   &kp MINUS         &kp C_MUTE    &kp C_BRI_DN  &kp C_BRI_UP  &none  &none
                                               &kp N0   &kp DOT        &trans   &trans
             >;
         };  
